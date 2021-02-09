@@ -3,7 +3,7 @@
     <mt-header title="分类" fixed></mt-header>
     <div class="top"></div>
     <div class="type_count" v-for="(c,v) of typecount" :key="v">
-    <router-link :to="`/type/${c.TypeId}`">
+    <router-link :to="`/type/${c.TypeId}/${c.Type}`">
         <img v-lazy="`/img/index/${c.back_img}`">
         <div>
           <p v-text="c.Type"></p>

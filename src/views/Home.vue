@@ -3,76 +3,91 @@
     <mt-header title="Lover 花" fixed></mt-header>
     <mt-swipe class="swipe">
       <mt-swipe-item>
+        <router-link to="/type/1/玫瑰">
         <img src="/img/index/01.jpg">
+        </router-link>
       </mt-swipe-item>
       <mt-swipe-item>
+        <router-link to="/type/2/康乃馨">
         <img src="/img/index/02.jpg">
+        </router-link>
       </mt-swipe-item>
       <mt-swipe-item>
+        <router-link to="/type/3/百合">
         <img src="/img/index/03.jpg">
+        </router-link>
       </mt-swipe-item>
       <mt-swipe-item>
+        <router-link to="/type/4/郁金香">
         <img src="/img/index/04.jpg">
+        </router-link>
       </mt-swipe-item>
     </mt-swipe>
-    <!-- <mt-navbar v-model="active">
-      <mt-tab-item id="1">
-        <img src="../assets/04.jpg" slot="icon">
-        玫瑰
-      </mt-tab-item>
-      <mt-tab-item id="2">
-        <img src="../assets/03.jpg" slot="icon">
-        康乃馨
-      </mt-tab-item>
-      <mt-tab-item id="3">
-        <img src="../assets/01.jpg" slot="icon">
-        郁金香
-      </mt-tab-item>
-      <mt-tab-item id="4">
-        <img src="../assets/02.jpg" slot="icon">
-        百合
-      </mt-tab-item>
-    </mt-navbar> -->
-    <h1>精品推荐</h1>
     <div class="index_body">
-      <router-link v-for="(p,i) of category1" :key="i" :to="`/details/${p.id}`">
-        <div>
-          <img :src="`/img/index/${p.flower_image}`">
-          <span v-text="p.title.slice(0,10)+'...'"></span>
-          <p v-text="'¥'+p.price.toFixed(2)"></p>
+        <h1 v-text="'特别推荐'"></h1>
+          <router-link v-for="(p,i) of category1" :key="i" :to="`/details/${p.id}`">
+            <div>
+              <img :src="`/img/index/${p.flower_image}`">
+              <span v-text="p.title.slice(0,10)+'...'"></span>
+              <p v-text="'¥'+p.price.toFixed(2)"></p>
+            </div>
+          </router-link>
         </div>
-      </router-link>
-    </div>  
-    <h1>新品推荐</h1>
-    <div class="index_body">
-      <router-link v-for="(p,i) of category2" :key="i" :to="`/details/${p.id}`">
-        <div>
-          <img :src="`/img/index/${p.flower_image}`">
-          <span v-text="p.title.slice(0,10)+'...'"></span>
-          <p v-text="'¥'+p.price.toFixed(2)"></p>
+        <div class="index_body">
+        <h1 v-text="'新品推荐'"></h1>
+          <router-link v-for="(p,i) of category2" :key="i" :to="`/details/${p.id}`">
+            <div>
+              <img :src="`/img/index/${p.flower_image}`">
+              <span v-text="p.title.slice(0,10)+'...'"></span>
+              <p v-text="'¥'+p.price.toFixed(2)"></p>
+            </div>
+          </router-link>
+        </div> 
+        <div class="index_body">
+        <h1 v-text="'精品推荐'"></h1>
+          <router-link v-for="(p,i) of category3" :key="i" :to="`/details/${p.id}`">
+            <div>
+              <img :src="`/img/index/${p.flower_image}`">
+              <span v-text="p.title.slice(0,10)+'...'"></span>
+              <p v-text="'¥'+p.price.toFixed(2)"></p>
+            </div>
+          </router-link>
+        </div>     
+        <div class="index_body">
+        <h1 v-text="'人气推荐'"></h1>
+          <router-link v-for="(p,i) of category4" :key="i" :to="`/details/${p.id}`">
+            <div>
+              <img :src="`/img/index/${p.flower_image}`">
+              <span v-text="p.title.slice(0,10)+'...'"></span>
+              <p v-text="'¥'+p.price.toFixed(2)"></p>
+            </div>
+          </router-link>
+        </div> 
+        
+      <mt-tab-container
+        infinite-scroll-distance="20"
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="disabled"
+        infinite-scroll-immediate-check="true"
+      >
+      <mt-tab-container-item>
+        <!-- 单一文章信息开始 -->
+        <div class="index_body">
+        <h1 v-text="'猜你喜欢'"></h1>
+          <router-link v-for="(p,i) of category5" :key="i" :to="`/details/${p.id}`">
+            <div>
+              <img v-lazy="`/img/index/${p.flower_image}`">
+              <span v-text="p.title.slice(0,10)+'...'"></span>
+              <p v-text="'¥'+p.price.toFixed(2)"></p>
+            </div>
+          </router-link>
         </div>
-      </router-link>
-    </div> 
-    <h1>人气推荐</h1>
-    <div class="index_body">
-      <router-link v-for="(p,i) of category3" :key="i" :to="`/details/${p.id}`">
-        <div>
-          <img :src="`/img/index/${p.flower_image}`">
-          <span v-text="p.title.slice(0,10)+'...'"></span>
-          <p v-text="'¥'+p.price.toFixed(2)"></p>
-        </div>
-      </router-link>
-    </div> 
-    <h1>猜你喜欢</h1>
-    <div class="index_body">
-      <router-link v-for="(p,i) of category4" :key="i"  :to="`/details/${p.id}`">
-        <div>
-          <img v-lazy="`/img/index/${p.flower_image}`">
-          <span v-text="p.title.slice(0,10)+'...'"></span>
-          <p v-text="'¥'+p.price.toFixed(2)"></p>
-        </div>
-      </router-link>
-    </div> 
+        <!-- 单一文章信息结束 -->
+      </mt-tab-container-item>
+    </mt-tab-container>
+    <div style="padding:20px;background:#f5f5f5;color:#333;text-align:center;" v-show="page==1?false:page>=pagecount">
+      到底了,没有更多了...
+    </div>
     <div class="bottom"></div>
     <mt-tabbar v-model="current" fixed>
       <mt-tab-item id="index" href="/">
@@ -105,27 +120,75 @@ export default {
     return{
       active:"1",
       current:"index",
-      arr:2,
+      typeindex:[],
       category:[],
-      category1:[],
+      category1:{},
       category2:[],
       category3:[],
-      category4:[]
+      category4:[],
+      category5:[],
+      page:1,
+      pagecount:0,
+      disabled: false,
     }
   },
+  methods:{
+    loadData(page){
+      this.disabled = true;
+      this.$indicator.open({
+        text: "加载中...",
+        spinnerType: "fading-circle",
+      });
+      this.axios.get("/category",{
+        params:{
+          page:page,
+        }
+      }).then((result) => {
+        this.pagecount=result.data.pagecount;
+        let category = result.data.result;
+        console.log(category)
+        this.category1=category.splice(0,4);
+        this.category2=category.splice(0,4);
+        this.category3=category.splice(0,4);
+        this.category4=category.splice(0,4);
+        category.forEach(item=>{
+          this.category5.push(item)
+        })
+        this.$indicator.close();
+        this.disabled = false;
+      });
+    },
+    loadMore() {
+      // 页码累加
+      this.page++;
+      // 当前页码在总页数范围内时获取文章列表数据
+      if (this.page <= this.pagecount) {
+        this.disabled = true;
+        this.$indicator.open({
+          text: "加载中...",
+          spinnerType: "fading-circle",
+        });
+        this.axios.get("/category",{
+          params:{
+            page:this.page,
+          }
+        }).then((result) => {
+          this.pagecount=result.data.pagecount;
+          let category=result.data.result;
+          console.log(category)
+          category.forEach(item=>{
+            this.category5.push(item)
+          })
+          this.$indicator.close();
+          this.disabled = false;
+        });
+        console.log(this.page)
+      }
+    },
+  },
   mounted(){
-    this.axios.get("/category").then((result) => {
-      this.category = result.data.result;
-      this.category1=this.category.splice(0,4);
-      this.category2=this.category.splice(0,4);
-      this.category3=this.category.splice(0,4);
-      this.category4=this.category.splice(0,4);
-      console.log(this.category1)
-      console.log(this.category2)
-      console.log(this.category3)
-      console.log(this.category)
-    });
-  }
+    this.loadData(1)
+  },
 }
 </script>
 
@@ -137,6 +200,7 @@ export default {
   padding: 10px 0;
   color: red;
   text-align: center;
+  width: 100%;
 }
 .index .mint-header{
   background-color: white;
@@ -163,15 +227,15 @@ export default {
   flex-wrap: wrap;
   text-align: center;
   width: 100%;
-  margin-bottom: 8px;
 }
 .index .bottom{
   margin-bottom: 55px;
 }
 .index .index_body a{
   width: 45%;
-  border: 1px solid gray;
+  border: 1px solid #eee;
   margin: 0px 5px 10px 10px;
+  color: black;
   border-radius: 5px;
 }
 .index .index_body div img{
@@ -184,6 +248,14 @@ export default {
 }
 .index .index_body div p{
   padding: 10px 0;
+}
+.index .mint-button{
+  padding: 5px 20px;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid red;
+  width: 300px;
+  border-radius: 39px;
 }
 .index .mint-tabbar a{
   color: black;
